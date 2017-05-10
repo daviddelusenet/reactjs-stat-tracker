@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import StatTracker from './components/StatTracker/StatTracker';
+import StatsTracker from './components/StatsTracker/StatsTracker';
 import './stylesheets/Stylesheets.scss';
 
 const render = (Component) => {
@@ -13,11 +13,11 @@ const render = (Component) => {
   );
 };
 
-render(StatTracker);
+render(StatsTracker);
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/StatTracker/StatTracker', () => {
-    render(StatTracker)
+  module.hot.accept('./components/StatsTracker/StatsTracker', () => {
+    render(StatsTracker)
   });
 }
