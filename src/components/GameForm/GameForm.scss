@@ -1,0 +1,37 @@
+@import '../../shared/Variables/Variables';
+
+.GameForm {
+  display: flex;
+  font-family: $ff-futura;
+  border: 1px solid $c-black;
+  background-color: $c-white;
+  flex-wrap: wrap;
+}
+
+.GameForm__select,
+.GameForm__input,
+.GameForm__submit {
+  padding: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid $c-black;
+  background-color: $c-white;
+}
+
+  .GameForm__select,
+  .GameForm__input {
+    flex: 0 0 50%;
+  }
+
+  .GameForm__select {
+    border-radius: 0;
+    appearance: none;
+  }
+
+  .GameForm__input {
+  }
+
+  .GameForm__submit {
+    cursor: pointer;
+    flex: 0 0 100%;
+  }
