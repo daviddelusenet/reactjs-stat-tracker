@@ -1,0 +1,30 @@
+@import '../../shared/Variables/Variables';
+
+.StatsOverview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .StatsOverview__container {
+    padding: 20px 10px;
+    text-align: center;
+    border-right: 1px solid $c-black;
+    border-bottom: 2px solid $c-black;
+    flex: 0 0 50%;
+
+    &:nth-child(even) {
+      border-right: 0;
+      border-left: 1px solid $c-black;
+    }
+  }
+
+  .StatsOverview__stat {
+    font-family: $ff-futura;
+    font-size: 50px;
+    line-height: 1;
+  }
+
+  .StatsOverview__stat-description {
+    font-size: 18px;
+    font-weight: 400;
+  }
