@@ -1,23 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import StatsTracker from './components/StatsTracker/StatsTracker';
 import './stylesheets/Stylesheets.scss';
 
-const render = (Component) => {
+import Router from './components/Router';
+import Routes from './components/Routes';
+
+const renderApp = (appRoutes) => {
   ReactDOM.render(
     <AppContainer>
-      <Component />
+      <Router routes={appRoutes} />
     </AppContainer>,
     document.querySelector('#main')
   );
 };
 
-render(StatsTracker);
+renderApp(Routes);
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/StatsTracker/StatsTracker', () => {
-    render(StatsTracker)
+  module.hot.accept('./components/Routes', () => {
+    const newRoutes = require('./components/Routes').default;
+    renderApp(newRoutes);
   });
 }
