@@ -66,23 +66,21 @@ class StatsTracker extends React.Component {
     let totalPoints = 0;
     let index = 0;
 
-    this.setState((prevState, props) => {
-      // loop over all the games and save all of the points in the corresponding variable
-      for (let game of this.state.games) {
-        index++;
-        totalPoints += game.points;
-      }
+    // loop over all the games and save all of the points in the corresponding variable
+    for (let game of this.state.games) {
+      index++;
+      totalPoints += parseInt(game.totalPoints);
+    }
 
-      // return a new updated state
-      return update(prevState, {
-        individual: {
-          $push: [
-            {description: 'total points', value: totalPoints},
-            {description: 'average points', value: totalPoints / index}
-          ]
-        }
-      });
-    });
+    // update the state
+    this.setState(update(this.state, {
+      individual: {
+        $push: [
+          {description: 'total points', value: totalPoints},
+          {description: 'average points', value: (totalPoints / index).toFixed(2)}
+        ]
+      }
+    }));
   }
 
   calculateFreeThrowStatistics() {
@@ -91,25 +89,23 @@ class StatsTracker extends React.Component {
     let totalMakes = 0;
     let index = 0;
 
-    this.setState((prevState, props) => {
-      // loop over all the games and save all the fta/ftm's in the corresponding variables
-      for (let game of this.state.games) {
-        index++;
-        totalAttempts += game.fta;
-        totalMakes += game.ftm;
-      }
+    // loop over all the games and save all the fta/ftm's in the corresponding variables
+    for (let game of this.state.games) {
+      index++;
+      totalAttempts += parseInt(game.freeThrowsAttempted);
+      totalMakes += parseInt(game.freeThrowsMade);
+    }
 
-      // return a new updated state
-      return update(prevState, {
-        individual: {
-          $push: [
-            {description: 'total free throws made', value: totalMakes},
-            {description: 'total free throws attempted', value: totalAttempts},
-            {description: 'free throw percentage', value: ((100 / totalAttempts) * totalMakes).toFixed(2)}
-          ]
-        }
-      });
-    });
+    // update the state
+    this.setState(update(this.state, {
+      individual: {
+        $push: [
+          {description: 'total free throws made', value: totalMakes},
+          {description: 'total free throws attempted', value: totalAttempts},
+          {description: 'free throw percentage', value: ((100 / totalAttempts) * totalMakes).toFixed(2)}
+        ]
+      }
+    }));
   }
 
   calculateFoulStatistics() {
@@ -117,23 +113,25 @@ class StatsTracker extends React.Component {
     let totalFouls = 0;
     let index = 0;
 
-    this.setState((prevState, props) => {
-      // loop over all the games and save all the fouls in the corresponding variable
-      for (let game of this.state.games) {
-        index++;
-        totalFouls += game.fouls;
-      }
+    // loop over all the games and save all the fouls in the corresponding variable
+    for (let game of this.state.games) {
+      let fouls = parseInt(game.foulsCommitted);
 
-      // return a new updated state
-      return update(prevState, {
-        individual: {
-          $push: [
-            {description: 'total fouls', value: totalFouls},
-            {description: 'average fouls', value: totalFouls / index}
-          ]
-        }
-      });
-    });
+      if (!isNaN(fouls)) {
+        index++;
+        totalFouls += parseInt(game.foulsCommitted);
+      }
+    }
+
+    // update the state
+    this.setState(update(this.state, {
+      individual: {
+        $push: [
+          {description: 'total fouls', value: totalFouls},
+          {description: 'average fouls', value: (totalFouls / index).toFixed(2)}
+        ]
+      }
+    }));
   }
 
   render() {
@@ -141,7 +139,7 @@ class StatsTracker extends React.Component {
       <div styleName="StatsTracker">
         <GameForm addGame={this.addGame} />
         <GameOverview games={this.state.games} />
-        <StatsOverview individual={this.state.individual} />
+        <StatsOverview gamesPlayed={this.state.games.length} individual={this.state.individual} />
       </div>
     );
   }

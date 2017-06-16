@@ -3,8 +3,8 @@ import './StatsOverview.scss';
 
 class StatsOverview extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     // Bind functions
   }
@@ -18,6 +18,11 @@ class StatsOverview extends React.Component {
   render() {
     return(
       <div styleName="StatsOverview">
+        <div styleName="StatsOverview__container">
+          <p styleName="StatsOverview__stat">{ this.props.gamesPlayed }</p>
+          <p styleName="StatsOverview__stat-description">games played</p>
+        </div>
+
         {this.props.individual.map((stat, key) => {
           return(
             <div styleName="StatsOverview__container" key={key}>
