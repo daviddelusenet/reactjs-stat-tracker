@@ -3,33 +3,24 @@ import './GameForm.scss';
 
 class GameForm extends React.Component {
 
-  constructor() {
-    super();
-
-    // Bind functions
-  }
-
-  componentWillMount() {}
-
-  componentWillUnmount() {}
-
   handleSubmit(e) {
     e.preventDefault();
 
     const formData = {};
 
+    formData.id = Date.now();
     formData.season = this.season.value;
-    formData.date = this.season.date;
-    formData.homeTeam = this.season.homeTeam;
-    formData.awayTeam = this.season.awayTeam;
-    formData.homeTeamScore = this.season.homeTeamScore;
-    formData.awayTeamScore = this.season.awayTeamScore;
-    formData.freeThrowsAttempted = this.season.freeThrowsAttempted;
-    formData.freeThrowsMade = this.season.freeThrowsMade;
-    formData.twoPointersMade = this.season.twoPointersMade;
-    formData.threePointersMade = this.season.threePointersMade;
-    formData.totalPoints = this.season.totalPoints;
-    formData.foulsCommitted = this.season.foulsCommitted;
+    formData.date = this.date.value;
+    formData.homeTeam = this.homeTeam.value;
+    formData.awayTeam = this.awayTeam.value;
+    formData.homeTeamScore = this.homeTeamScore.value;
+    formData.awayTeamScore = this.awayTeamScore.value;
+    formData.freeThrowsAttempted = this.freeThrowsAttempted.value;
+    formData.freeThrowsMade = this.freeThrowsMade.value;
+    formData.twoPointersMade = this.twoPointersMade.value;
+    formData.threePointersMade = this.threePointersMade.value;
+    formData.totalPoints = this.totalPoints.value;
+    formData.foulsCommitted = this.foulsCommitted.value;
 
     this.props.addGame(formData);
   }

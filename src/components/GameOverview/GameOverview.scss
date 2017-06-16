@@ -1,0 +1,42 @@
+@import '../../shared/Variables/Variables';
+
+.GameOverview {
+  overflow-x: auto;
+  margin-top: 20px;
+  background-color: $c-white;
+}
+
+  .GameOverview__table {
+    table-layout: fixed;
+    white-space: nowrap;
+  }
+
+  .GameOverview__thead {}
+
+  .GameOverview__table-row {
+    border-bottom: 1px solid $c-alto;
+
+    &:nth-child(odd) {
+      .GameOverview__standard-cell {
+        background-color: $c-concrete;
+      }
+    }
+  }
+
+  .GameOverview__tbody {
+    .GameOverview__table-row:last-child {
+      border: 0;
+    }
+  }
+
+  .GameOverview__header-cell,
+  .GameOverview__standard-cell {
+    padding: 5px 10px;
+    text-align: left;
+  }
+
+  .GameOverview__header-cell {
+    font-weight: bold;
+  }
+
+  .GameOverview__standard-cell {}

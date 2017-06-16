@@ -5,6 +5,7 @@ import base from './../../base';
 import './StatsTracker.scss';
 
 import GameForm from '../GameForm/GameForm';
+import GameOverview from '../GameOverview/GameOverview';
 import StatsOverview from '../StatsOverview/StatsOverview';
 
 class StatsTracker extends React.Component {
@@ -13,11 +14,11 @@ class StatsTracker extends React.Component {
     super();
 
     // Bind functions
-    this.addGame.bind(this);
+    this.addGame = this.addGame.bind(this);
 
-    this.calculatePointStatistics.bind(this);
-    this.calculateFreeThrowStatistics.bind(this);
-    this.calculateFoulStatistics.bind(this);
+    this.calculatePointStatistics = this.calculatePointStatistics.bind(this);
+    this.calculateFreeThrowStatistics = this.calculateFreeThrowStatistics.bind(this);
+    this.calculateFoulStatistics = this.calculateFoulStatistics.bind(this);
 
     // Set initial state
     this.state = {
@@ -52,7 +53,11 @@ class StatsTracker extends React.Component {
   }
 
   addGame(data) {
-    console.log(data);
+    this.setState(update(this.state, {
+      games: {
+        $push: [data]
+      }
+    }));
   }
 
   // Functions to calculate individual statistics
@@ -135,7 +140,8 @@ class StatsTracker extends React.Component {
     return(
       <div styleName="StatsTracker">
         <GameForm addGame={this.addGame} />
-        <StatsOverview games={this.state.games} individual={this.state.individual} />
+        <GameOverview games={this.state.games} />
+        <StatsOverview individual={this.state.individual} />
       </div>
     );
   }
