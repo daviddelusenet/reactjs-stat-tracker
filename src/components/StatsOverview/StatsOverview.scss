@@ -2,6 +2,9 @@
 
 .StatsOverview {
   display: flex;
+  margin-bottom: 30px;
+  border-top: 2px solid $c-black;
+  background-color: $c-white;
   flex-wrap: wrap;
 }
 
